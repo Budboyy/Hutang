@@ -2,34 +2,36 @@
 <html lang="id">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
     <title>Pencatat Hutang Sederhana</title>
     <style>
       :root {
-        --bg: #0f172a; /* slate-900 */
-        --panel: #111827; /* gray-900 */
-        --muted: #94a3b8; /* slate-400 */
-        --text: #e5e7eb; /* gray-200 */
-        --accent: #22c55e; /* green-500 */
-        --danger: #ef4444; /* red-500 */
-        --warn: #f59e0b; /* amber-500 */
-        --card: #1f2937; /* gray-800 */
-        --border: #334155; /* slate-700 */
+        --bg: #0f172a;
+        --panel: #111827;
+        --muted: #94a3b8;
+        --text: #e5e7eb;
+        --accent: #22c55e;
+        --danger: #ef4444;
+        --warn: #f59e0b;
+        --card: #1f2937;
+        --border: #334155;
       }
       * {
         box-sizing: border-box;
       }
       body {
         margin: 0;
-        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
-          Ubuntu, Inter, Helvetica, Arial;
-        background: linear-gradient(180deg, #0b1220, #0f172a 35%, #0b1220);
+        font-family: system-ui, Roboto, Helvetica, Arial, sans-serif;
+        background: #0f172a;
         color: var(--text);
       }
       header {
         position: sticky;
         top: 0;
-        background: rgba(15, 23, 42, 0.8);
+        background: rgba(15, 23, 42, 0.9);
         backdrop-filter: blur(10px);
         border-bottom: 1px solid var(--border);
         z-index: 10;
@@ -37,26 +39,10 @@
       .container {
         max-width: 1100px;
         margin: 0 auto;
-        padding: 16px;
-      }
-      .grid {
-        display: grid;
-        gap: 12px;
-      }
-      .cards {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        gap: 12px;
-      }
-      .card {
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        padding: 14px;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+        padding: 12px;
       }
       h1 {
-        font-size: 22px;
+        font-size: 20px;
         margin: 0;
       }
       h2 {
@@ -64,45 +50,33 @@
         margin: 0 0 8px;
       }
       label {
-        font-size: 12px;
+        font-size: 13px;
         color: var(--muted);
       }
       input,
       select,
       textarea {
         width: 100%;
-        padding: 10px 12px;
-        border-radius: 12px;
+        padding: 10px;
+        border-radius: 8px;
         border: 1px solid var(--border);
         background: #0b1220;
         color: var(--text);
+        font-size: 14px;
       }
       textarea {
         min-height: 70px;
         resize: vertical;
       }
-      .row {
-        display: grid;
-        gap: 10px;
-        grid-template-columns: repeat(12, 1fr);
-      }
-      .col-6 {
-        grid-column: span 6;
-      }
-      .col-4 {
-        grid-column: span 4;
-      }
-      .col-3 {
-        grid-column: span 3;
-      }
       .btn {
         display: inline-flex;
         align-items: center;
-        gap: 8px;
-        padding: 10px 12px;
+        gap: 6px;
+        padding: 8px 12px;
         border: none;
-        border-radius: 12px;
+        border-radius: 8px;
         cursor: pointer;
+        font-size: 14px;
         font-weight: 600;
       }
       .btn-primary {
@@ -125,58 +99,55 @@
       .toolbar {
         display: flex;
         flex-wrap: wrap;
-        gap: 8px;
+        gap: 6px;
+      }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 12px;
+        margin-bottom: 12px;
+      }
+      .grid {
+        display: grid;
+        gap: 10px;
+      }
+      .row {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
       }
       .table {
         width: 100%;
-        border-collapse: separate;
-        border-spacing: 0 8px;
+        border-collapse: collapse;
+      }
+      .table th,
+      .table td {
+        padding: 8px;
+        text-align: left;
+        font-size: 13px;
       }
       .table th {
-        font-size: 12px;
         color: var(--muted);
-        text-align: left;
-        padding: 0 10px;
+        border-bottom: 1px solid var(--border);
       }
       .table td {
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-left: none;
-        border-right: none;
-        padding: 10px;
-      }
-      .rowcard {
-        border-radius: 12px;
-        overflow: hidden;
+        border-bottom: 1px solid var(--border);
       }
       .pill {
-        padding: 4px 8px;
+        padding: 2px 6px;
         border-radius: 999px;
         font-size: 12px;
-        font-weight: 700;
+        font-weight: 600;
         display: inline-block;
       }
       .pill-open {
-        background: rgba(245, 158, 11, 0.15);
+        background: rgba(245, 158, 11, 0.2);
         color: #fbbf24;
-        border: 1px solid rgba(245, 158, 11, 0.25);
       }
       .pill-paid {
-        background: rgba(34, 197, 94, 0.15);
+        background: rgba(34, 197, 94, 0.2);
         color: #86efac;
-        border: 1px solid rgba(34, 197, 94, 0.25);
-      }
-      .right {
-        display: flex;
-        gap: 6px;
-        justify-content: flex-end;
-      }
-      .muted {
-        color: var(--muted);
-        font-size: 12px;
-      }
-      .hidden {
-        display: none;
       }
       .footer {
         margin: 20px 0;
@@ -184,30 +155,33 @@
         font-size: 12px;
         text-align: center;
       }
-      .kbd {
-        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-        background: #0b1220;
-        border: 1px solid var(--border);
-        padding: 2px 6px;
-        border-radius: 6px;
-      }
-      @media (max-width: 760px) {
-        .col-6,
-        .col-4,
-        .col-3 {
-          grid-column: span 12;
+      @media (max-width: 600px) {
+        h1 {
+          font-size: 18px;
+        }
+        .toolbar {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .btn {
+          width: 100%;
+          justify-content: center;
+        }
+        .table th,
+        .table td {
+          font-size: 12px;
+          padding: 6px;
         }
       }
-      /* Modal */
       .modal {
         position: fixed;
         inset: 0;
-        background: rgba(3, 7, 18, 0.6);
-        backdrop-filter: blur(4px);
+        background: rgba(0, 0, 0, 0.6);
         display: none;
         align-items: center;
         justify-content: center;
         z-index: 50;
+        padding: 10px;
       }
       .modal.active {
         display: flex;
@@ -215,10 +189,10 @@
       .modal .panel {
         background: var(--panel);
         border: 1px solid var(--border);
-        border-radius: 16px;
-        max-width: 520px;
-        width: 92%;
-        padding: 16px;
+        border-radius: 12px;
+        max-width: 420px;
+        width: 100%;
+        padding: 14px;
       }
     </style>
   </head>
@@ -230,7 +204,8 @@
           display: flex;
           align-items: center;
           justify-content: space-between;
-          gap: 12px;
+          gap: 8px;
+          flex-wrap: wrap;
         "
       >
         <h1>📘 Pencatat Hutang</h1>
@@ -244,664 +219,206 @@
             type="file"
             accept="application/json"
             class="hidden"
+            style="display: none"
           />
           <button class="btn btn-ghost" id="btnExportCsv">🧾 Export CSV</button>
-          <button class="btn btn-warn" id="btnBackup">
-            ⏰ Pengingat Backup
-          </button>
+          <button class="btn btn-warn" id="btnBackup">⏰ Backup</button>
         </div>
       </div>
     </header>
 
-    <main class="container grid" style="margin-top: 12px">
-      <section class="cards">
-        <div class="card">
-          <h2>Tambah / Edit Hutang</h2>
-          <form id="debtForm" class="grid" onsubmit="return false;">
-            <input type="hidden" id="debtId" />
-            <div class="row">
-              <div class="col-6">
-                <label>Nama Peminjam</label>
-                <input id="name" placeholder="cth: Budi Santoso" required />
-              </div>
-              <div class="col-6">
-                <label>No. Kontak (opsional)</label>
-                <input id="contact" placeholder="cth: 0812…" />
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-4">
-                <label>Jumlah (Rp)</label>
-                <input
-                  id="amount"
-                  type="number"
-                  min="0"
-                  step="100"
-                  placeholder="cth: 150000"
-                  required
-                />
-              </div>
-              <div class="col-4">
-                <label>Tanggal Pinjam</label>
-                <input id="date" type="date" />
-              </div>
-              <div class="col-4">
-                <label>Jatuh Tempo</label>
-                <input id="dueDate" type="date" />
-              </div>
+    <main class="container">
+      <div class="card">
+        <h2>Tambah / Edit Hutang</h2>
+        <form id="debtForm" onsubmit="return false;" class="grid">
+          <input type="hidden" id="debtId" />
+          <div class="row">
+            <div>
+              <label>Nama Peminjam</label>
+              <input id="name" placeholder="cth: Budi" required />
             </div>
             <div>
-              <label>Catatan</label>
-              <textarea
-                id="note"
-                placeholder="cth: Pinjam untuk modal dagang"
-              ></textarea>
-            </div>
-            <div style="display: flex; gap: 8px; flex-wrap: wrap">
-              <button class="btn btn-primary" id="btnSave">💾 Simpan</button>
-              <button class="btn btn-ghost" id="btnReset" type="reset">
-                🔄 Reset
-              </button>
-            </div>
-          </form>
-        </div>
-
-        <div class="card">
-          <h2>Filter & Pencarian</h2>
-          <div class="grid" style="gap: 8px">
-            <input id="search" placeholder="Cari nama atau catatan… (Ctrl+/)" />
-            <div class="row">
-              <div class="col-6">
-                <label>Status</label>
-                <select id="statusFilter">
-                  <option value="all">Semua</option>
-                  <option value="open">Belum Lunas</option>
-                  <option value="paid">Lunas</option>
-                </select>
-              </div>
-              <div class="col-6">
-                <label>Urutkan</label>
-                <select id="sortBy">
-                  <option value="createdAt_desc">Terbaru dibuat</option>
-                  <option value="createdAt_asc">Terlama dibuat</option>
-                  <option value="dueDate_asc">Jatuh tempo terdekat</option>
-                  <option value="dueDate_desc">Jatuh tempo terjauh</option>
-                  <option value="amount_desc">Nominal terbesar</option>
-                  <option value="amount_asc">Nominal terkecil</option>
-                  <option value="name_asc">Nama A→Z</option>
-                  <option value="name_desc">Nama Z→A</option>
-                </select>
-              </div>
-            </div>
-            <div class="muted">
-              Tips: tekan <span class="kbd">Ctrl</span> +
-              <span class="kbd">/</span> untuk fokus ke pencarian.
+              <label>No. Kontak</label>
+              <input id="contact" placeholder="cth: 0812…" />
             </div>
           </div>
-        </div>
-
-        <div class="card">
-          <h2>Ringkasan</h2>
           <div class="row">
-            <div class="col-4">
-              <div class="muted">Total Hutang Aktif</div>
-              <div id="sumOpen" style="font-size: 20px; font-weight: 800">
-                Rp 0
-              </div>
+            <div>
+              <label>Jumlah (Rp)</label>
+              <input id="amount" type="number" min="0" step="100" required />
             </div>
-            <div class="col-4">
-              <div class="muted">Total Tertagih</div>
-              <div
-                id="sumOutstanding"
-                style="font-size: 20px; font-weight: 800"
-              >
-                Rp 0
-              </div>
+            <div>
+              <label>Tanggal Pinjam</label>
+              <input id="date" type="date" />
             </div>
-            <div class="col-4">
-              <div class="muted">Sudah Tertagih</div>
-              <div id="sumCollected" style="font-size: 20px; font-weight: 800">
-                Rp 0
-              </div>
+            <div>
+              <label>Jatuh Tempo</label>
+              <input id="dueDate" type="date" />
             </div>
           </div>
-        </div>
-      </section>
+          <div>
+            <label>Catatan</label>
+            <textarea id="note"></textarea>
+          </div>
+          <div class="toolbar">
+            <button class="btn btn-primary" id="btnSave">💾 Simpan</button>
+            <button class="btn btn-ghost" id="btnReset" type="reset">
+              🔄 Reset
+            </button>
+          </div>
+        </form>
+      </div>
 
-      <section class="card">
-        <div
-          style="
-            display: flex;
-            align-items: end;
-            justify-content: space-between;
-            gap: 8px;
-            margin-bottom: 6px;
-          "
-        >
-          <h2>Daftar Hutang</h2>
-          <div class="muted" id="countInfo">0 data</div>
+      <div class="card">
+        <h2>Filter & Pencarian</h2>
+        <input id="search" placeholder="Cari…" />
+        <div class="row">
+          <div>
+            <label>Status</label>
+            <select id="statusFilter">
+              <option value="all">Semua</option>
+              <option value="open">Belum Lunas</option>
+              <option value="paid">Lunas</option>
+            </select>
+          </div>
+          <div>
+            <label>Urutkan</label>
+            <select id="sortBy">
+              <option value="createdAt_desc">Terbaru</option>
+              <option value="createdAt_asc">Terlama</option>
+              <option value="amount_desc">Nominal terbesar</option>
+              <option value="amount_asc">Nominal terkecil</option>
+            </select>
+          </div>
         </div>
-        <table class="table" id="debtTable">
+      </div>
+
+      <div class="card">
+        <h2>Ringkasan</h2>
+        <div class="row">
+          <div>
+            <div class="muted">Total Aktif</div>
+            <div id="sumOpen">0</div>
+          </div>
+          <div>
+            <div class="muted">Tertagih</div>
+            <div id="sumOutstanding">Rp 0</div>
+          </div>
+          <div>
+            <div class="muted">Sudah Bayar</div>
+            <div id="sumCollected">Rp 0</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Daftar Hutang</h2>
+        <table class="table">
           <thead>
             <tr>
               <th>Nama</th>
-              <th>Kontak</th>
-              <th>Pinjam</th>
-              <th>Terbayar</th>
+              <th>Jumlah</th>
               <th>Sisa</th>
-              <th>Tempo</th>
               <th>Status</th>
-              <th class="right">Aksi</th>
+              <th>Aksi</th>
             </tr>
           </thead>
           <tbody id="tbody"></tbody>
         </table>
-      </section>
+      </div>
 
       <div class="footer">
-        Data disimpan di perangkat Anda (localStorage). Lakukan
-        <b>Export JSON</b> sebagai cadangan berkala.
+        Data tersimpan di HP/laptop Anda (localStorage). Backup rutin via
+        Export.
       </div>
     </main>
 
-    <!-- Modal Pembayaran -->
-    <div class="modal" id="payModal" aria-hidden="true">
+    <div class="modal" id="payModal">
       <div class="panel">
-        <h2>Catat Pembayaran</h2>
-        <div class="grid" style="gap: 8px">
-          <input
-            id="payAmount"
-            type="number"
-            min="0"
-            step="100"
-            placeholder="Jumlah bayar (Rp)"
-          />
-          <input id="payDate" type="date" />
-          <input id="payNote" placeholder="Catatan (opsional)" />
-          <div class="toolbar" style="justify-content: flex-end">
-            <button class="btn btn-ghost" id="btnClosePay">Tutup</button>
-            <button class="btn btn-primary" id="btnSavePay">Simpan</button>
-          </div>
-        </div>
-        <div class="muted" id="payInfo" style="margin-top: 6px"></div>
-      </div>
-    </div>
-
-    <!-- Modal Detail -->
-    <div class="modal" id="detailModal" aria-hidden="true">
-      <div class="panel">
-        <h2>Detail Hutang</h2>
-        <div id="detailBody"></div>
-        <div
-          class="toolbar"
-          style="justify-content: flex-end; margin-top: 10px"
-        >
-          <button class="btn btn-ghost" id="btnCloseDetail">Tutup</button>
+        <h2>Pembayaran</h2>
+        <input id="payAmount" type="number" placeholder="Jumlah bayar" />
+        <input id="payDate" type="date" />
+        <div class="toolbar" style="margin-top: 8px">
+          <button class="btn btn-ghost" id="btnClosePay">Tutup</button>
+          <button class="btn btn-primary" id="btnSavePay">Simpan</button>
         </div>
       </div>
     </div>
 
     <script>
-      // ===== Helper =====
       const $ = (q) => document.querySelector(q);
-      const $$ = (q) => Array.from(document.querySelectorAll(q));
-      const fmt = new Intl.NumberFormat("id-ID");
-      const money = (n) =>
-        `Rp ${fmt.format(Math.max(0, Math.round(Number(n || 0))))}`;
+      const $$ = (q) => document.querySelectorAll(q);
+      const money = (n) => "Rp " + Number(n || 0).toLocaleString("id-ID");
       const today = () => new Date().toISOString().slice(0, 10);
-      const uid = () =>
-        crypto.randomUUID
-          ? crypto.randomUUID()
-          : (Date.now() + "" + Math.random()).replace(".", "");
+      const KEY = "debt-data-v1";
+      let data = JSON.parse(localStorage.getItem(KEY) || "[]");
+      const save = () => localStorage.setItem(KEY, JSON.stringify(data));
 
-      // ===== Storage =====
-      const KEY = "debt-ledger:v1";
-      const load = () => {
-        try {
-          return JSON.parse(localStorage.getItem(KEY)) || [];
-        } catch (e) {
-          return [];
-        }
-      };
-      const save = (data) => localStorage.setItem(KEY, JSON.stringify(data));
-
-      // ===== State =====
-      let data = load();
-      let currentPayId = null;
-
-      // ===== UI: Form =====
-      const form = $("#debtForm");
-      const fields = [
-        "debtId",
-        "name",
-        "contact",
-        "amount",
-        "date",
-        "dueDate",
-        "note",
-      ].reduce((a, id) => ((a[id] = $("#" + id)), a), {});
-
-      $("#btnSave").addEventListener("click", () => {
-        const id = fields.debtId.value || uid();
-        const now = new Date().toISOString();
-        const amount = Number(fields.amount.value || 0);
-        const item = {
-          id,
-          name: fields.name.value.trim(),
-          contact: fields.contact.value.trim(),
-          amount,
-          date: fields.date.value || today(),
-          dueDate: fields.dueDate.value || "",
-          note: fields.note.value.trim(),
-          payments: [],
-          createdAt: now,
-          updatedAt: now,
-        };
-        if (!item.name || amount <= 0) {
-          alert("Nama dan jumlah harus diisi.");
-          return;
-        }
-        // Update jika sudah ada
-        const idx = data.findIndex((x) => x.id === id);
-        if (idx >= 0) {
-          item.payments = data[idx].payments || [];
-          item.createdAt = data[idx].createdAt;
-          data[idx] = { ...data[idx], ...item, updatedAt: now };
-        } else {
-          data.push(item);
-        }
-        save(data);
-        render();
-        form.reset();
-        fields.debtId.value = "";
-        fields.date.value = today();
-      });
-
-      $("#btnReset").addEventListener("click", () => {
-        fields.debtId.value = "";
-        fields.date.value = today();
-      });
-
-      // Prefill date today
-      fields.date.value = today();
-
-      // ===== UI: Filter/Search/Sort =====
-      const search = $("#search");
-      const statusFilter = $("#statusFilter");
-      const sortBy = $("#sortBy");
-
-      const applyFilters = (list) => {
-        const q = search.value.toLowerCase().trim();
-        let out = list.filter(
-          (it) =>
-            it.name.toLowerCase().includes(q) ||
-            (it.note || "").toLowerCase().includes(q)
-        );
-        if (statusFilter.value !== "all") {
-          out = out.filter(
-            (it) =>
-              (remaining(it) <= 0 ? "paid" : "open") === statusFilter.value
-          );
-        }
-        const sortKey = sortBy.value;
-        const cmp = (a, b) => {
-          const getDue = (x) =>
-            x.dueDate ? new Date(x.dueDate).getTime() : Infinity;
-          const getRem = (x) => remaining(x);
-          switch (sortKey) {
-            case "createdAt_desc":
-              return (b.createdAt || "").localeCompare(a.createdAt || "");
-            case "createdAt_asc":
-              return (a.createdAt || "").localeCompare(b.createdAt || "");
-            case "dueDate_asc":
-              return getDue(a) - getDue(b);
-            case "dueDate_desc":
-              return getDue(b) - getDue(a);
-            case "amount_desc":
-              return (b.amount || 0) - (a.amount || 0);
-            case "amount_asc":
-              return (a.amount || 0) - (b.amount || 0);
-            case "name_asc":
-              return a.name.localeCompare(b.name);
-            case "name_desc":
-              return b.name.localeCompare(a.name);
-            default:
-              return 0;
-          }
-        };
-        out.sort(cmp);
-        return out;
-      };
-
-      search.addEventListener("input", render);
-      statusFilter.addEventListener("change", render);
-      sortBy.addEventListener("change", render);
-
-      // Keyboard shortcut: Ctrl+/
-      window.addEventListener("keydown", (e) => {
-        if (e.key === "/" && (e.ctrlKey || e.metaKey)) {
-          e.preventDefault();
-          search.focus();
-          search.select();
-        }
-      });
-
-      // ===== Calculations =====
-      const paid = (it) =>
-        (it.payments || []).reduce((s, p) => s + Number(p.amount || 0), 0);
-      const remaining = (it) => Math.max(0, Number(it.amount || 0) - paid(it));
-
-      // ===== Render =====
-      function render() {
-        const list = applyFilters(data);
-        const tbody = $("#tbody");
-        tbody.innerHTML = "";
-        list.forEach((it) => {
+      const render = () => {
+        const tb = $("#tbody");
+        tb.innerHTML = "";
+        data.forEach((it) => {
+          const sisa = it.amount - (it.paid || 0);
           const tr = document.createElement("tr");
-          tr.className = "rowcard";
-          const r = remaining(it);
-          const status =
-            r <= 0
+          tr.innerHTML = `<td>${it.name}</td><td>${money(
+            it.amount
+          )}</td><td>${money(sisa)}</td><td>${
+            sisa <= 0
               ? '<span class="pill pill-paid">Lunas</span>'
-              : '<span class="pill pill-open">Belum</span>';
-          const tempo = it.dueDate
-            ? new Date(it.dueDate).toLocaleDateString("id-ID")
-            : "-";
-          tr.innerHTML = `
-          <td>${it.name}</td>
-          <td>${it.contact || "-"}</td>
-          <td>${money(it.amount)}</td>
-          <td>${money(paid(it))}</td>
-          <td>${money(r)}</td>
-          <td>${tempo}</td>
-          <td>${status}</td>
-          <td>
-            <div class="right">
-              <button class="btn btn-primary" title="Catat pembayaran" data-act="pay" data-id="${
-                it.id
-              }">💸</button>
-              <button class="btn btn-ghost" title="Detail" data-act="detail" data-id="${
-                it.id
-              }">🔎</button>
-              <button class="btn btn-ghost" title="Edit" data-act="edit" data-id="${
-                it.id
-              }">✏️</button>
-              <button class="btn btn-danger" title="Hapus" data-act="del" data-id="${
-                it.id
-              }">🗑️</button>
-            </div>
-          </td>`;
-          tbody.appendChild(tr);
+              : '<span class="pill pill-open">Belum</span>'
+          }</td><td><button data-id="${
+            it.id
+          }" class="pay">💸</button><button data-id="${
+            it.id
+          }" class="del">🗑️</button></td>`;
+          tb.appendChild(tr);
         });
-        $("#countInfo").textContent = list.length + " data";
-        // Ringkasan
-        const totalOpen = data.filter((it) => remaining(it) > 0).length;
-        const sumOutstanding = data.reduce((s, it) => s + remaining(it), 0);
-        const sumCollected = data.reduce((s, it) => s + paid(it), 0);
-        $("#sumOpen").textContent = totalOpen + " orang";
-        $("#sumOutstanding").textContent = money(sumOutstanding);
-        $("#sumCollected").textContent = money(sumCollected);
-        // bind actions
-        $$("#tbody [data-act]").forEach((btn) =>
-          btn.addEventListener("click", onRowAction)
-        );
-      }
+      };
 
-      function onRowAction(e) {
-        const act = e.currentTarget.getAttribute("data-act");
-        const id = e.currentTarget.getAttribute("data-id");
-        const it = data.find((x) => x.id === id);
-        if (!it) return;
-        if (act === "edit") {
-          fields.debtId.value = it.id;
-          fields.name.value = it.name;
-          fields.contact.value = it.contact || "";
-          fields.amount.value = it.amount;
-          fields.date.value = it.date || "";
-          fields.dueDate.value = it.dueDate || "";
-          fields.note.value = it.note || "";
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        }
-        if (act === "del") {
-          if (confirm("Hapus data hutang ini?")) {
-            data = data.filter((x) => x.id !== id);
-            save(data);
-            render();
-          }
-        }
-        if (act === "pay") {
-          currentPayId = id;
-          const sisa = remaining(it);
-          $("#payAmount").value = sisa > 0 ? sisa : "";
-          $("#payDate").value = today();
-          $("#payNote").value = "";
-          $("#payInfo").textContent = `Sisa saat ini: ${money(
-            sisa
-          )} | Total pinjam: ${money(it.amount)}`;
-          openModal("#payModal");
-        }
-        if (act === "detail") {
-          const lines = [
-            `<div class="muted">Nama</div><div style="font-weight:700;margin-bottom:8px">${it.name}</div>`,
-            `<div class="muted">Kontak</div><div style="margin-bottom:8px">${
-              it.contact || "-"
-            }</div>`,
-            `<div class="muted">Pinjam</div><div style="margin-bottom:8px">${money(
-              it.amount
-            )} pada ${new Date(it.date || it.createdAt).toLocaleDateString(
-              "id-ID"
-            )}</div>`,
-            `<div class="muted">Jatuh Tempo</div><div style="margin-bottom:8px">${
-              it.dueDate
-                ? new Date(it.dueDate).toLocaleDateString("id-ID")
-                : "-"
-            }</div>`,
-            `<div class="muted">Catatan</div><div style="margin-bottom:8px">${
-              it.note || "-"
-            }</div>`,
-            `<div class="muted">Pembayaran</div>`,
-          ];
-          if (!it.payments || it.payments.length === 0) {
-            lines.push(
-              '<div style="margin-bottom:8px">Belum ada pembayaran.</div>'
-            );
-          } else {
-            lines.push(
-              '<ul style="margin:6px 0 0 16px">' +
-                it.payments
-                  .map(
-                    (p) =>
-                      `<li>${new Date(p.date).toLocaleDateString(
-                        "id-ID"
-                      )} — ${money(p.amount)} ${
-                        p.note ? "(" + p.note + ")" : ""
-                      }</li>`
-                  )
-                  .join("") +
-                "</ul>"
-            );
-          }
-          lines.push(
-            `<div class="muted" style="margin-top:8px">Sisa: <b>${money(
-              remaining(it)
-            )}</b></div>`
-          );
-          $("#detailBody").innerHTML = lines.join("");
-          openModal("#detailModal");
-        }
-      }
-
-      // ===== Modal helpers =====
-      function openModal(sel) {
-        const m = $(sel);
-        m.classList.add("active");
-        m.setAttribute("aria-hidden", "false");
-      }
-      function closeModal(sel) {
-        const m = $(sel);
-        m.classList.remove("active");
-        m.setAttribute("aria-hidden", "true");
-      }
-      $("#btnClosePay").onclick = () => closeModal("#payModal");
-      $("#btnCloseDetail").onclick = () => closeModal("#detailModal");
-      window.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") {
-          closeModal("#payModal");
-          closeModal("#detailModal");
-        }
-      });
-
-      // ===== Save Payment =====
-      $("#btnSavePay").addEventListener("click", () => {
-        const it = data.find((x) => x.id === currentPayId);
-        if (!it) {
-          closeModal("#payModal");
-          return;
-        }
-        const amt = Number($("#payAmount").value || 0);
-        const dt = $("#payDate").value || today();
-        const note = $("#payNote").value.trim();
-        if (amt <= 0) {
-          alert("Jumlah pembayaran harus lebih dari 0");
-          return;
-        }
-        const sisa = remaining(it);
-        if (amt > sisa) {
-          if (!confirm("Jumlah melebihi sisa. Tandai sebagai lunas?")) return;
-        }
-        it.payments = it.payments || [];
-        it.payments.push({ amount: amt, date: dt, note });
-        it.updatedAt = new Date().toISOString();
-        save(data);
-        render();
-        closeModal("#payModal");
-      });
-
-      // ===== Export/Import =====
-      $("#btnExportJson").addEventListener("click", () => {
-        const blob = new Blob([JSON.stringify(data, null, 2)], {
-          type: "application/json",
-        });
-        const url = URL.createObjectURL(blob);
-        const a = Object.assign(document.createElement("a"), {
-          href: url,
-          download: `debt-backup-${today()}.json`,
-        });
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        URL.revokeObjectURL(url);
-      });
-      $("#btnExportCsv").addEventListener("click", () => {
-        const rows = [
-          [
-            "Nama",
-            "Kontak",
-            "Tanggal Pinjam",
-            "Jatuh Tempo",
-            "Jumlah",
-            "Terbayar",
-            "Sisa",
-            "Catatan",
-            "Pembayaran Rinci",
-          ],
-          ...data.map((it) => [
-            it.name,
-            it.contact || "",
-            it.date || "",
-            it.dueDate || "",
-            it.amount,
-            paid(it),
-            remaining(it),
-            (it.note || "").replace(/\n/g, " "),
-            (it.payments || [])
-              .map(
-                (p) =>
-                  `${p.date}:${p.amount}${p.note ? "(" + p.note + ")" : ""}`
-              )
-              .join(" | "),
-          ]),
-        ];
-        const csv = rows
-          .map((r) =>
-            r.map((v) => `"${(v + "").replace(/"/g, '""')}"`).join(",")
-          )
-          .join("\n");
-        const blob = new Blob(["\ufeff" + csv], {
-          type: "text/csv;charset=utf-8;",
-        });
-        const url = URL.createObjectURL(blob);
-        const a = Object.assign(document.createElement("a"), {
-          href: url,
-          download: `debt-export-${today()}.csv`,
-        });
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        URL.revokeObjectURL(url);
-      });
-
-      $("#importJson").addEventListener("change", (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
-        const rd = new FileReader();
-        rd.onload = () => {
-          try {
-            const incoming = JSON.parse(rd.result);
-            if (!Array.isArray(incoming)) throw new Error("Format tidak valid");
-            // merge by id; generate id jika tidak ada
-            incoming.forEach((it) => {
-              if (!it.id) it.id = uid();
-            });
-            const map = new Map(data.map((x) => [x.id, x]));
-            incoming.forEach((it) =>
-              map.set(it.id, { ...map.get(it.id), ...it })
-            );
-            data = Array.from(map.values());
-            save(data);
-            render();
-            alert("Import berhasil. Data digabungkan.");
-          } catch (err) {
-            alert("Gagal import: " + err.message);
-          }
+      $("#btnSave").onclick = () => {
+        const id = $("#debtId").value || Date.now() + "";
+        const obj = {
+          id,
+          name: $("#name").value,
+          contact: $("#contact").value,
+          amount: Number($("#amount").value),
+          date: $("#date").value || today(),
+          dueDate: $("#dueDate").value,
+          note: $("#note").value,
+          paid: 0,
         };
-        rd.readAsText(file);
-        e.target.value = "";
-      });
+        const idx = data.findIndex((x) => x.id == id);
+        if (idx >= 0) data[idx] = obj;
+        else data.push(obj);
+        save();
+        render();
+        $("#debtForm").reset();
+      };
 
-      // ===== Backup reminder =====
-      $("#btnBackup").addEventListener("click", () => {
-        const next = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
-        const msg = "Jangan lupa export backup data hutang hari ini.";
-        try {
-          if ("Notification" in window) {
-            Notification.requestPermission().then((p) => {
-              if (p === "granted") {
-                new Notification("Pengingat Backup", { body: msg });
-                alert(
-                  "Notifikasi diaktifkan (segera tampil). Setel pengingat kalender untuk 7 hari ke depan."
-                );
-              } else {
-                alert(
-                  "Izin notifikasi ditolak. Mohon setel pengingat di kalender pada " +
-                    next.toLocaleDateString("id-ID")
-                );
-              }
-            });
-          } else {
-            alert(
-              "Browser tidak mendukung Notification API. Setel pengingat manual pada " +
-                next.toLocaleDateString("id-ID")
-            );
-          }
-        } catch (_) {
-          alert(
-            "Setel pengingat manual pada " + next.toLocaleDateString("id-ID")
-          );
+      $("#tbody").onclick = (e) => {
+        if (e.target.classList.contains("del")) {
+          data = data.filter((x) => x.id != e.target.dataset.id);
+          save();
+          render();
         }
-      });
+        if (e.target.classList.contains("pay")) {
+          const it = data.find((x) => x.id == e.target.dataset.id);
+          if (!it) return;
+          $("#payModal").classList.add("active");
+          $("#payAmount").value = it.amount - (it.paid || 0);
+          $("#payDate").value = today();
+          $("#btnSavePay").onclick = () => {
+            it.paid = (it.paid || 0) + Number($("#payAmount").value);
+            save();
+            render();
+            $("#payModal").classList.remove("active");
+          };
+        }
+      };
 
-      // Initial render
+      $("#btnClosePay").onclick = () =>
+        $("#payModal").classList.remove("active");
+
       render();
     </script>
   </body>
